@@ -8,6 +8,7 @@ def test_put_characters(api_characters: ApiCharacter):
     our_hero = heroes[randint(0, len(heroes))]
     new_identity = "okay"
 
+    #  Update hero information with new identity
     api_characters.put_character(
         our_hero["name"],
         our_hero["universe"],
@@ -17,5 +18,6 @@ def test_put_characters(api_characters: ApiCharacter):
         new_identity
     )
 
+    #  Check that hero is updated
     get_hero = api_characters.get_character(our_hero["name"]).json()["result"]
     assert get_hero["identity"] == new_identity

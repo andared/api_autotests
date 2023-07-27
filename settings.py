@@ -9,4 +9,4 @@ env = Env()
 class Settings:
     API_HOST = env.str("API_HOST")
     LOGIN = env.str("LOGIN")
-    PASSWORD = env.str("PASSWORD")
+    PASSWORD = env.str("PASSWORD", "http://rest.test.ivi.ru")

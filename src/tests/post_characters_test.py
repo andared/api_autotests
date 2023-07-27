@@ -20,13 +20,9 @@ def test_post_character(api_characters: ApiCharacter):
     assert result["weight"] == weight
     assert result["height"] == height
 
-    #  Find hero
-    heroes = api_characters.get_characters().json()["result"]
-    for hero in heroes:
-        if hero["name"] == name:
-            return
-    else:
-        assert False, "No hero in GET /characters"
+    #  Check that hero created
+    hero = api_characters.get_character(name).json()["result"]
+    assert hero["name"] == name
 
 
 def test_501_post_character(api_characters: ApiCharacter):
@@ -46,6 +42,7 @@ def test_501_post_character(api_characters: ApiCharacter):
             height=height
         )
 
+    #  Try to create 501-st hero
     try:
         api_characters.post_character(
             name=str(501),
@@ -68,7 +65,7 @@ def test_break_validate_post_character(api_characters: ApiCharacter):
     weight = 96.547457
     height = 178.2353
 
-    #  Create hero
+    #  Create hero with broken data
     try:
         api_characters.post_character(name, universe, education, weight, height)
         assert False, "Expected 400 status code"

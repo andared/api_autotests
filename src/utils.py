@@ -11,5 +11,5 @@ class Utils:
             schema(schemas).exact(resp)
             return True
         except SchemaError as e:
-            logging.warning(f"\n{e}")
+            logging.error(f"\n{e}")
             return False
